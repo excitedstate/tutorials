@@ -1,0 +1,14 @@
+/Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/deps/pyo3_build_config-7ff778fee346eed2.d: /Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/lib.rs /Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/errors.rs /Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/impl_.rs /Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/build/pyo3-build-config-1e9a505a025bac26/out/pyo3-build-config-file.txt /Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/build/pyo3-build-config-1e9a505a025bac26/out/pyo3-build-config.txt
+
+/Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/deps/libpyo3_build_config-7ff778fee346eed2.rlib: /Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/lib.rs /Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/errors.rs /Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/impl_.rs /Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/build/pyo3-build-config-1e9a505a025bac26/out/pyo3-build-config-file.txt /Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/build/pyo3-build-config-1e9a505a025bac26/out/pyo3-build-config.txt
+
+/Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/deps/libpyo3_build_config-7ff778fee346eed2.rmeta: /Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/lib.rs /Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/errors.rs /Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/impl_.rs /Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/build/pyo3-build-config-1e9a505a025bac26/out/pyo3-build-config-file.txt /Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/build/pyo3-build-config-1e9a505a025bac26/out/pyo3-build-config.txt
+
+/Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/lib.rs:
+/Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/errors.rs:
+/Users/bing/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-build-config-0.22.6/src/impl_.rs:
+/Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/build/pyo3-build-config-1e9a505a025bac26/out/pyo3-build-config-file.txt:
+/Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/build/pyo3-build-config-1e9a505a025bac26/out/pyo3-build-config.txt:
+
+# env-dep:CARGO_PKG_VERSION=0.22.6
+# env-dep:OUT_DIR=/Users/bing/Documents/trae_projects/utorials/rust_extension/target/debug/build/pyo3-build-config-1e9a505a025bac26/out
