@@ -5,10 +5,7 @@ build/
 dist/
 wheels/
 *.egg-info
-*.so
-
-# Virtual environments
-.venv
+.venv/
 
 # C/C++
 *.o
@@ -17,8 +14,7 @@ wheels/
 *.dll
 
 # Rust
-/target/
-Cargo.lock
+target/
 
 # IDE
 .vscode/
@@ -34,6 +30,16 @@ Thumbs.db
 # Logs
 *.log
 
-# Temporary files
-*.tmp
-*.temp
+# Testing
+.pytest_cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+*.so
+
+# Trae AI
+.trae/
