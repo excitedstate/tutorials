@@ -11,6 +11,8 @@ def producer_consumer_with_queue():
     
     # 创建线程安全的队列
     queue = Queue(maxsize=10)
+    # 消费者数量
+    consumer_count = 2
     
     def producer(name: str, items: int):
         """生产者函数"""
@@ -19,20 +21,19 @@ def producer_consumer_with_queue():
             queue.put(item)
             print(f"生产者 {name}: 生产了 {item}, 队列大小: {queue.qsize()}")
             time.sleep(random.uniform(0.1, 0.5))
-        # 生产结束标志
-        queue.put(None)
     
     def consumer(name: str):
         """消费者函数"""
         while True:
             item = queue.get()
-            if item is None:
-                # 把结束标志放回队列，让其他消费者知道
-                queue.put(None)
-                break
-            print(f"消费者 {name}: 消费了 {item}, 队列大小: {queue.qsize()}")
-            time.sleep(random.uniform(0.2, 0.8))
-            queue.task_done()
+            try:
+                if item is None:
+                    break
+                print(f"消费者 {name}: 消费了 {item}, 队列大小: {queue.qsize()}")
+                time.sleep(random.uniform(0.2, 0.8))
+            finally:
+                # 确保无论是否是None，都调用task_done()
+                queue.task_done()
     
     print("\n=== 使用Queue实现生产者-消费者模式 ===")
     
@@ -48,10 +49,18 @@ def producer_consumer_with_queue():
     consumer1.start()
     consumer2.start()
     
-    # 等待线程结束
+    # 等待生产者结束
     producer1.join()
     producer2.join()
+    
+    # 所有生产者结束后，放入与消费者数量相等的结束标志
+    for _ in range(consumer_count):
+        queue.put(None)
+    
+    # 等待队列中的所有任务完成
     queue.join()
+    
+    # 等待消费者结束
     consumer1.join()
     consumer2.join()
     
