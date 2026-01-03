@@ -10,12 +10,17 @@ dependencies = [
     "setuptools>=80.9.0",
     "setuptools-rust>=1.12.0",
 ]
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple/"
+default = true
 [[tool.uv.index]]
 name = "tencent"
 url = "https://mirrors.cloud.tencent.com/pypi/simple/"
 
 [dependency-groups]
 dev = [
+    "pytest>=9.0.2",
     "ruff>=0.14.10",
 ]
 #url = "https://mirrors.tencentyun.com/pypi/simple/" # 内网

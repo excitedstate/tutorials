@@ -5,7 +5,7 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from queue import Queue
-from src.multi_threading import (
+from src.multi_thread import (
     basic_thread_demo,
     thread_with_args,
     thread_with_return_value,
