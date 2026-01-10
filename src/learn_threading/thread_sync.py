@@ -9,11 +9,12 @@ from queue import Queue
 # 共享变量示例
 shared_counter = 0
 
+
 def race_condition_demo():
     """竞态条件示例"""
     global shared_counter
     shared_counter = 0
-    
+
     def increment_counter():
         """递增共享计数器"""
         global shared_counter
@@ -22,32 +23,33 @@ def race_condition_demo():
             temp = shared_counter
             temp += 1
             shared_counter = temp
-    
+
     print("\n=== 竞态条件示例 ===")
     print(f"初始计数器值: {shared_counter}")
-    
+
     # 创建两个线程同时修改共享变量
     t1 = threading.Thread(target=increment_counter)
     t2 = threading.Thread(target=increment_counter)
-    
+
     t1.start()
     t2.start()
-    
+
     t1.join()
     t2.join()
-    
+
     print(f"最终计数器值: {shared_counter}")
     print(f"期望计数器值: 200000")
     print(f"差异: {200000 - shared_counter}")
+
 
 def lock_demo():
     """使用锁解决竞态条件示例"""
     global shared_counter
     shared_counter = 0
-    
+
     # 创建锁
     lock = threading.Lock()
-    
+
     def increment_counter_safe():
         """使用锁安全地递增共享计数器"""
         global shared_counter
@@ -56,26 +58,27 @@ def lock_demo():
                 temp = shared_counter
                 temp += 1
                 shared_counter = temp
-    
+
     print("\n=== 使用锁解决竞态条件示例 ===")
     print(f"初始计数器值: {shared_counter}")
-    
+
     # 创建两个线程同时修改共享变量
     t1 = threading.Thread(target=increment_counter_safe)
     t2 = threading.Thread(target=increment_counter_safe)
-    
+
     t1.start()
     t2.start()
-    
+
     t1.join()
     t2.join()
-    
+
     print(f"最终计数器值: {shared_counter}")
     print(f"期望计数器值: 200000")
 
+
 def rlock_demo():
     """可重入锁示例"""
-    
+
     def recursive_function(level: int):
         """递归函数，演示可重入锁"""
         if level > 0:
@@ -84,18 +87,19 @@ def rlock_demo():
                 print(f"递归层级 {level}: 成功获取锁")
                 recursive_function(level - 1)
             print(f"递归层级 {level}: 释放锁")
-    
+
     print("\n=== 可重入锁示例 ===")
-    
+
     rlock = threading.RLock()
     recursive_function(3)
 
+
 def condition_variable_demo():
     """条件变量示例"""
-    
+
     queue = Queue(maxsize=5)
     condition = threading.Condition()
-    
+
     def producer():
         """生产者线程"""
         for i in range(10):
@@ -104,16 +108,16 @@ def condition_variable_demo():
                 while queue.full():
                     print(f"生产者: 队列已满，等待消费者消费")
                     condition.wait()
-                
+
                 # 生产数据
                 item = f"item-{i}"
                 queue.put(item)
                 print(f"生产者: 生产了 {item}")
-                
+
                 # 通知消费者
                 condition.notify_all()
             time.sleep(random.uniform(0.1, 0.3))
-    
+
     def consumer(consumer_id: int):
         """消费者线程"""
         for _ in range(5):
@@ -122,38 +126,39 @@ def condition_variable_demo():
                 while queue.empty():
                     print(f"消费者 {consumer_id}: 队列空，等待生产者生产")
                     condition.wait()
-                
+
                 # 消费数据
                 item = queue.get()
                 print(f"消费者 {consumer_id}: 消费了 {item}")
-                
+
                 # 通知生产者
                 condition.notify_all()
             time.sleep(random.uniform(0.2, 0.5))
-    
+
     print("\n=== 条件变量示例 (生产者-消费者模式) ===")
-    
+
     # 创建生产者和消费者线程
     producer_thread = threading.Thread(target=producer, name="Producer")
     consumer1 = threading.Thread(target=consumer, args=(1,), name="Consumer-1")
     consumer2 = threading.Thread(target=consumer, args=(2,), name="Consumer-2")
-    
+
     # 启动线程
     producer_thread.start()
     consumer1.start()
     consumer2.start()
-    
+
     # 等待线程结束
     producer_thread.join()
     consumer1.join()
     consumer2.join()
 
+
 def semaphore_demo():
     """信号量示例"""
-    
+
     # 信号量控制同时访问资源的线程数
     semaphore = threading.Semaphore(2)
-    
+
     def access_resource(thread_id: int):
         """访问受信号量保护的资源"""
         print(f"线程 {thread_id}: 尝试访问资源")
@@ -161,76 +166,80 @@ def semaphore_demo():
             print(f"线程 {thread_id}: 成功访问资源")
             time.sleep(random.uniform(0.5, 1.5))
             print(f"线程 {thread_id}: 释放资源")
-    
+
     print("\n=== 信号量示例 ===")
-    
+
     # 创建多个线程同时访问资源
     threads = []
     for i in range(5):
-        t = threading.Thread(target=access_resource, args=(i+1,), name=f"Thread-{i+1}")
+        t = threading.Thread(
+            target=access_resource, args=(i + 1,), name=f"Thread-{i+1}"
+        )
         threads.append(t)
         t.start()
-    
+
     # 等待所有线程结束
     for t in threads:
         t.join()
 
+
 def event_demo():
     """事件示例"""
-    
+
     # 创建事件对象
     event = threading.Event()
-    
+
     def wait_for_event(thread_id: int):
         """等待事件触发的线程"""
         print(f"线程 {thread_id}: 等待事件触发")
         event.wait()  # 等待事件被设置
         print(f"线程 {thread_id}: 事件已触发，继续执行")
-    
+
     print("\n=== 事件示例 ===")
-    
+
     # 创建多个等待事件的线程
     threads = []
     for i in range(3):
-        t = threading.Thread(target=wait_for_event, args=(i+1,), name=f"Waiter-{i+1}")
+        t = threading.Thread(target=wait_for_event, args=(i + 1,), name=f"Waiter-{i+1}")
         threads.append(t)
         t.start()
-    
+
     # 主线程等待一段时间后触发事件
     time.sleep(2)
     print("主线程: 触发事件")
     event.set()  # 设置事件
-    
+
     # 等待所有线程结束
     for t in threads:
         t.join()
 
+
 def barrier_demo():
     """屏障示例"""
-    
+
     # 创建屏障，等待5个线程到达
     barrier = threading.Barrier(5)
-    
+
     def worker(thread_id: int):
         """工作线程，到达屏障后继续执行"""
         print(f"线程 {thread_id}: 开始执行")
         time.sleep(random.uniform(0.5, 2.0))
         print(f"线程 {thread_id}: 到达屏障")
-        
+
         # 等待所有线程到达屏障
         barrier.wait()
-        
+
         print(f"线程 {thread_id}: 屏障已通过，继续执行")
-    
+
     print("\n=== 屏障示例 ===")
-    
+
     # 创建5个工作线程
     threads = []
     for i in range(5):
-        t = threading.Thread(target=worker, args=(i+1,), name=f"Worker-{i+1}")
+        t = threading.Thread(target=worker, args=(i + 1,), name=f"Worker-{i+1}")
         threads.append(t)
         t.start()
-    
+
     # 等待所有线程结束
     for t in threads:
         t.join()
