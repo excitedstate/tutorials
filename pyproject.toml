@@ -3,7 +3,7 @@ name = "tutorials"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 dependencies = [
     "aiofiles>=25.1.0",
     "aiohttp>=3.13.3",
@@ -24,8 +24,5 @@ name = "tencent"
 url = "https://mirrors.cloud.tencent.com/pypi/simple/"
 
 [dependency-groups]
-dev = [
-    "pytest>=9.0.2",
-    "ruff>=0.14.10",
-]
+dev = ["pytest>=9.0.2", "ruff>=0.14.10"]
 #url = "https://mirrors.tencentyun.com/pypi/simple/" # 内网

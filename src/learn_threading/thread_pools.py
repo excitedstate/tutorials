@@ -29,7 +29,6 @@ def thread_pool_demo():
     with ThreadPoolExecutor(max_workers=4) as executor:
         # 提交任务到线程池
         futures = [executor.submit(task, i) for i in [35, 36, 37, 38, 39, 40]]
-
         # 获取任务结果
         results = []
         for future in futures:
